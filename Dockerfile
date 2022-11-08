@@ -52,6 +52,11 @@ cd kaolin
 git checkout v0.12.0  
 python setup.py develop
 
+cd /
+
+git clone --recursive https://github.com/gamorosino/deep-geo-reg.git
+cd deep-geo-reg
+git checkout docker
 
 #make it work under singularity 
 #https://wiki.ubuntu.com/DashAsBinSh 
