@@ -38,25 +38,23 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 
 ## install Python Modules with Conda
-
 RUN  conda install -c anaconda python=3.7 \
 		&& conda install pip \
 		&& conda install -c conda-forge nibabel \
 		&& conda install -c matplotlib \
-		&& pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 \
+		&& pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 
 
 ## Clone Kaolin
 
-git clone --recursive https://github.com/NVIDIAGameWorks/kaolin
-cd kaolin
-git checkout v0.12.0  
-python setup.py develop
+RUN git clone --recursive https://github.com/NVIDIAGameWorks/kaolin \
+			&& cd kaolin \
+			&& git checkout v0.12.0 \
+			&& python setup.py develop \
+			&& cd 
 
-cd /
-
-git clone --recursive https://github.com/gamorosino/deep-geo-reg.git
-cd deep-geo-reg
-git checkout docker
+RUN git clone --recursive https://github.com/gamorosino/deep-geo-reg.git \
+		&& cd deep-geo-reg \
+		&& git checkout docker
 
 #make it work under singularity 
 #https://wiki.ubuntu.com/DashAsBinSh 
